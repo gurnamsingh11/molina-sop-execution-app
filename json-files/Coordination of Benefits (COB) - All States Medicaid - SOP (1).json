@@ -1,0 +1,550 @@
+{
+    "SOP_No": "MHI-CLM-030",
+    "Title": "Coordination of Benefits Processing",
+    "Bill Not Paid": "Refer to the Authorization Business Process",
+    "Effective_Date": "N/A",
+    "Department": "Claims",
+    "Product(s)": "Medicaid",
+    "State(s)": "All",
+    "Final_Approver_Name": "Tanya Contreras",
+    "Line(s)_of_Business": "All",
+    "Final_Approver_Title": "MHI- AVP, Core Operations",
+    "Document_Owner(s)": [
+        "Irene Armendariz",
+        "John (Jay) Belew",
+        "Julissa Bravo",
+        "Tanya Contreras",
+        "Cynthia Davila",
+        "Melissa Humphrey",
+        "Isabel Martin",
+        "Emmanuel Medrano",
+        "Yvette Smart",
+        "Nancy Vasquez",
+        "Frank Vernaza",
+        "Julissa Bravo"
+    ],
+    "Date": "07/17/2024",
+    "Technical_Writer": "Don Larson",
+    "Document_Approvers": null,
+    "Internal_Quality_Reviewer": null,
+    "IQR_Date": null,
+    "Overview": {
+        "Summary": "To document clear and consistent guidelines for coordinating benefits in accordance with established Molina protocols and industry best practices, when there are two or more payers with responsibility for the claim(s). Claims Department personnel who process COB claims will review claims and coordinate benefits based on the guidelines in this policy, and in accordance with regulatory requirements and industry standards for coordination of benefits."
+    },
+    "Contents": [
+        {
+            "Section": "Overview",
+            "Subsections": [
+                "Summary",
+                "Contents",
+                "Definitions",
+                "References"
+            ],
+            "Page": 1
+        },
+        {
+            "Section": "Processing Claims Involving Other Insurance",
+            "Subsections": [
+                "Identifying COB Claims",
+                "Identifying COBA Claims",
+                "Primary Payer Payment Information",
+                "COB Edit Generated in System, No Primary EOB",
+                "Services Billed with NEMB Form",
+                "COB with Medicare",
+                "Coordination on Inpatient Claims, Member Has Medicare Part B Only",
+                "When an Authorization is Needed, Secondary Claim",
+                "Member External Enrollment Segment",
+                "No Member External Enrollment Segment Exists \u2013 All States",
+                "No Member External Enrollment Segment Exists - Washington",
+                "Timely Filing, Secondary Claims",
+                "Signed Consent Forms",
+                "Eligibility Tab",
+                "EOB Exceptions \u2013 MIHP (Maternal Infant Health Program) Michigan"
+            ],
+            "Page": 5
+        },
+        {
+            "Section": "COB Payment Calculations",
+            "Subsections": [
+                "COB Methodologies",
+                "Determining if Claim Requires COB Processing",
+                "COB Calculation(s)"
+            ],
+            "Page": 11
+        },
+        {
+            "Section": "Third Party Liability",
+            "Page": 14
+        }
+    ],
+    "userQuery": "Return the user query as a JSON object.",
+    "Medicare Part B": {
+        "Description": "Part B is medical insurance and covers medically necessary professional services, including but not limited to:",
+        "Coverage": [
+            "Doctors\u2019 services",
+            "X-rays, diagnostic lab, and other diagnostic tests",
+            "Outpatient surgicenter and outpatient hospital care",
+            "Surgery and anesthesia",
+            "Durable medical equipment",
+            "Ambulance",
+            "Therapies, including physical therapy, occupational therapy, and speech therapy"
+        ],
+        "Preventive Services": [
+            "Certain vaccinations",
+            "Routine foot care for diabetics",
+            "Routine pap smears",
+            "Cholesterol screening for heart disease"
+        ]
+    },
+    "NCCI": {
+        "Description": "National Correct Coding Initiative, a compilation of coding guidelines developed by CMS that provide rules for:",
+        "Rules": [
+            "Correct coding of medical/surgical procedures",
+            "Mutually exclusive procedures",
+            "Rules for multiple procedure reduction",
+            "Modifier edit policies",
+            "What should be included in a \u201csurgical bundle\u201d"
+        ]
+    },
+    "NEMB Form": {
+        "Description": "Notice of Exclusions from Medicare Benefits, form CMS-20007; used by Medicare to advise that a service or item is excluded from coverage."
+    },
+    "OIV": {
+        "Description": "A workflow routing queue \u2013 Other Insurance Verification. Used when a claim is routed to the health plan via Workflow application to update the eligibility segment."
+    },
+    "Primary Payer": {
+        "Description": "The plan that pays first, based on the standard industry guidelines for group/commercial/employer-sponsored plans, Medicare Secondary Payer (MSP) guidelines for Senior plans/Medicare or Medicaid guidelines."
+    },
+    "Secondary Payer": {
+        "Description": "The plan/carrier/payer that pays second, based on the standard industry guidelines for a group, commercial or employer-sponsored plan, Medicare Secondary Payer (MSP) guidelines for Senior plans/Medicare or Medicaid guidelines."
+    },
+    "Tertiary Payer": {
+        "Description": "The plan that pays third (for example, there is Medicare, an employer sponsored plan, and Medicaid), based on the standard industry guidelines for group/commercial/employer-sponsored plan, Medicare Secondary Payer (MSP) guidelines for Senior plans/Medicare or Medicaid guidelines."
+    },
+    "Third Party Liability (TPL)": {
+        "Description": "The term, as generally used, relates to an injury or bodily condition that was caused by a \u201cthird party\u201d and may be reimbursable to the paying organization if determined to be a true liability. \u201cThird Party\u201d includes the following: some auto accidents, some lawsuits, slips and falls in a store/business where the store assumes liability, product liability cases, Workers Compensation, etc. Many plans have language in their benefits booklets or Evidence of Coverage (EOC) booklets to the effect that the plan has the right to recover, or pursue recovery, in the event the member/subscriber receives payment or settlement from a third party. Molina Healthcare has such wording in its plans. Actual wording may vary some from"
+    },
+    "title": "Processing Claims Involving Other Insurance",
+    "sections": [
+        {
+            "heading": "Identifying COB Claims",
+            "content": [
+                "COB claims can be identified in a variety of ways, including:",
+                "\u2022 Upon adjudication, the system generates a COB-related edit because the member has a primary external enrollment segment and Molina is the secondary payer",
+                "\u2022 A claim is pended with a COB-related pend code",
+                "\u2022 COB-related memos are attached to a claim",
+                "\u2022 Another carrier/payer name is identified on the claim form",
+                "\u2022 Another payer\u2019s EOB is submitted with the claim",
+                "\u2022 An entry appears in box 29, with other insurance information showing in boxes 11a through 11d, on the CMS-1500 form",
+                "\u2022 An entry appears in FL 54 on the UB-04 form"
+            ]
+        },
+        {
+            "heading": "Identifying COBA Claims",
+            "content": [
+                "COBA claims are identified in the core claims processing system in the Claims Attributes tab by Description \u201cCOBA;\u201d see image below:",
+                {
+                    "table": {
+                        "columns": [
+                            "Select",
+                            "Description",
+                            "Value",
+                            "Effective Date",
+                            "Termination Date",
+                            "Group"
+                        ],
+                        "rows": [
+                            [
+                                "",
+                                "COBA Claim Indicator",
+                                "COBA",
+                                "04/06/2016",
+                                "04/12/2016",
+                                ""
+                            ]
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "heading": "Primary Payer Payment Information",
+            "content": [
+                "Molina requires primary payment information to be submitted with the claim, even when the core claims processing system fires an edit code indicating that a COB enrollment segment exists. This information is needed to accurately calculate and reimburse secondary payment. The following types of notices from the primary payer are acceptable:",
+                "\u2022 An Explanation of Benefits (EOB)",
+                "\u2022 An Explanation of Medicare Benefits (EOMB)",
+                "\u2022 A Notice of Exclusion from Medicare Benefits (NEMB form)",
+                "\u2022 A denial letter",
+                "This required information regarding primary payment can also be submitted and accepted electronically via EDI. If a member has two or more plans, all payment or denial notices from the other carriers are required for processing (except for Third Party Liability). If the other carrier's payment notice is not present, deny the claim requesting primary payer information using the appropriate remit remark code."
+            ]
+        },
+        {
+            "heading": "COB Edit Generated in System, No Primary EOB",
+            "content": [
+                "Follow the steps below when a COB edit fires and there is no EOB or other notice containing payment information:",
+                {
+                    "table": {
+                        "columns": [
+                            "Step",
+                            "Action"
+                        ],
+                        "rows": [
+                            [
+                                "1",
+                                "Review the Member Administration module, including the LOI and COB tabs, and/or memos for the COB segment."
+                            ],
+                            [
+                                "2",
+                                "Review the claim to determine if services are identified as an EOB exception (i.e., not needing an EOB). Review state-specific guidelines as needed, as the exceptions may vary by state."
+                            ],
+                            [
+                                "3",
+                                "If appropriate, deny the claim back to the provider for resubmission with the primary carrier\u2019s EOB (or Medicare EOMB);"
+                            ],
+                            [
+                                "4",
+                                "Attach the applicable remit code. (End)"
+                            ]
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "query": "Return the user query as a JSON object.",
+    "Coordination on Inpatient Claims, Member has Medicare Part B Only": {
+        "Guidelines": [
+            {
+                "If": "the hospital is not an exception for authorization,",
+                "Then": "DENY the claim with the appropriate remit remark code (e.g., D-14, Requires prior authorization). Enter the appropriate Root Cause Attribute."
+            },
+            {
+                "If": "a member has Part B only,",
+                "Then": "then Molina will become the primary payer for the Part A charges, but secondary to the Part B expenses."
+            },
+            {
+                "If": "Molina first receives an inpatient claim, and the Medicare Part B payment information is submitted,",
+                "Then": "Molina PAYS the claim and coordinates with the Part B EOMB information."
+            },
+            {
+                "If": "the hospital then resubmits all the charges again, including inpatient charges with the Medicare Part B determination/payment EOMB,",
+                "Then": {
+                    "Step": [
+                        {
+                            "Step": 1,
+                            "Action": "If Molina already paid the part B portion of the claim, reverse the outpatient claim."
+                        },
+                        {
+                            "Step": 2,
+                            "Action": "Pay the inpatient claim by using the lower of logic COB processing guidelines and use the Medicare Part B payment as the \u201cTotal Paid Amount\u201d on the COB tab."
+                        },
+                        {
+                            "Step": 3,
+                            "Action": "If both bill types 11X and related 12X, 13X, and 14X are open, then coordinate the 11X and DENY the 12X, 13X, and 14X bill with the appropriate remit code (e.g., CC-16, Payment for the Medicare Part B service is included within the payment of the Part A Hospitalization claim). (End)"
+                        }
+                    ]
+                }
+            },
+            {
+                "If": "Molina previously paid an inpatient hospital claim that also included outpatient charges (e.g., ER charges), and then an EOMB is received subsequently with just the outpatient charges,",
+                "Then": "deny the outpatient billing with the appropriate remit code (e.g., CC-16, Payment for the Medicare Part B service is included within the payment of the Part A Hospitalization claim), and call track the claim to the appropriate recovery department for recoupment of the overpayment."
+            }
+        ]
+    },
+    "When an Authorization is Needed, Secondary Claim": {
+        "Guidelines": [
+            {
+                "If": "Molina is paying the difference between Molina allowable and the Medicare payment,",
+                "Then": "no authorization is required."
+            },
+            {
+                "If": "the primary payer denied the claim for lack of an authorization,",
+                "Then": "deny claim for not following primary carrier\u2019s guidelines using the applicable denial remit code."
+            },
+            {
+                "If": "the primary payer denied the claim as not a covered service and services require an authorization by Molina,",
+                "Then": "manually pend the claim and route to UMT within the K2 workflow application."
+            },
+            {
+                "If": "the primary payer denied the claim because benefits are exhausted and services require an authorization by Molina,",
+                "Then": "manually pend the claim and route to UMT within the workflow application."
+            },
+            {
+                "If": "service(s) were covered by the primary insurance,",
+                "Then": "no authorization is required."
+            },
+            {
+                "If": "service(s) were not covered (i.e., a non-covered benefit, no eligibility) by the primary insurance,",
+                "Then": "refer to the Authorization Business Process - All States and LOBs - SOP and the Authorization Business Matrix - All States and LOBs - Reference by individual state for guidelines. After UM review, when required, process as secondary indicating a zero payment by the primary payer."
+            },
+            {
+                "If": "a member has Medicare Part B only, and the claim is for inpatient hospital,",
+                "Then": "an authorization would be required since Molina would be primary for this service. Refer to Authorization Business Matrix - All States and LOBs - Reference for authorization requirement."
+            },
+            {
+                "If": "For UT only: authorization is present,",
+                "Then": "pay the claim as authorized."
+            },
+            {
+                "If": "For UT only: no authorization available,",
+                "Then": "send the claim to UM and DO NOT make a decision. This will require an authorization/review for medical necessity."
+            }
+        ]
+    },
+    "Member External Enrollment Segment": {
+        "Description": "The member must be eligible with the particular plan and the external enrollment segment (COB segment) must reflect eligibility for the date of service (DOS) on the claim."
+    },
+    "No Member External Enrollment Segment Exists \u2013 All States": {
+        "Description": "When a member has no external enrollment for COB processing, a message will appear: \u201cNo external enrollments found for member.\u201d For the state of Washington, go to \u201cNo Member External Enrollment Segment Exists \u2013 Washington\u201d section on page 16."
+    },
+    "No Member External Enrollment Segment Exists \u2013 All States, continued": {
+        "Stages": [
+            {
+                "Stage": 1,
+                "Who": "COB Unit Personnel",
+                "Description": "Click on OK and manually pend the claim (913) to have the COB segment added."
+            },
+            {
+                "Stage": 2,
+                "Who": null,
+                "Description": "Go through the edit steps."
+            },
+            {
+                "Stage": 3,
+                "Who": null,
+                "Description": "Access the K2 workflow module and enter the comment \"Requires COB segment, EOB attached.\""
+            },
+            {
+                "Stage": 4,
+                "Who": null,
+                "Description": "Within the workflow application, route the claim to the Eligibility Department, OIV queue."
+            }
+        ]
+    },
+    "user_query": {
+        "step": {
+            "number": 5,
+            "action": "Click on the Add button. (End)"
+        },
+        "claims_images": {
+            "electronic_claims_indicating_primary_insurance_information": {
+                "description": "Primary insurance information is now being populated on electronic claims. This information can be used to pay a claim as secondary without a paper copy of the primary carrier\u2019s EOB. If the secondary payment information cannot be determined, if it is not clear, and/or a negative amount is listed, follow these instructions:",
+                "instructions": [
+                    {
+                        "if": "the secondary carrier is identified,",
+                        "then": "deny the claim with the applicable remit code."
+                    },
+                    {
+                        "if": "the secondary carrier is NOT identified,",
+                        "then": "refer to state-specific COB processing guidelines."
+                    }
+                ]
+            },
+            "edi_claim_viewer": {
+                "description": "If COB primary payment information is available in the EDI claim viewer, there is no need to request the provider to resubmit a hard copy EOB. Follow specific benefit processing guidelines to determine when it is appropriate to request that the provider submit a hard copy EOB.",
+                "current_captures": {
+                    "ub_04_claims": [
+                        "PRIMARY PD AMT",
+                        "PRIMARY ALLOWABLE",
+                        "TOTAL BILLED CHARGES",
+                        "NON COVERED CHARGES",
+                        "TOTAL DENIED CHARGES",
+                        "PATIENT RESPONSIBILITY"
+                    ],
+                    "cms_1500_claims": [
+                        "PRIMARY PD AMT",
+                        "PRIMARY ALLOWABLE",
+                        "PATIENT RESPONSIBILITY",
+                        "PATIENT PAID"
+                    ]
+                }
+            },
+            "future_vision_viewer": {
+                "description": "The Future Vision claims viewer will have a scanned image of the submitted hard copy EOB."
+            }
+        }
+    },
+    "EOB_Exceptions": {
+        "Program": "MIHP (Maternal Infant Health Program) Michigan",
+        "Description": "The following service does not require a primary payer\u2019s EOB or authorization:",
+        "Codes": [
+            {
+                "Code": "96167",
+                "Description": "Hlth Bhv Ivntj Fam 1st 30",
+                "Maximum_Fee": "$95.80",
+                "Comments": null
+            },
+            {
+                "Code": "96168",
+                "Description": "Hlth Bhv Ivntj Fam Ea Addl",
+                "Maximum_Fee": "$16.19",
+                "Comments": "Limit is 2 per visit"
+            },
+            {
+                "Code": "99402",
+                "Description": "Preventative Counseling Indiv",
+                "Maximum_Fee": "$71.80",
+                "Comments": "Visit in office"
+            },
+            {
+                "Code": "99402",
+                "Description": "Preventative Counseling Indiv",
+                "Maximum_Fee": "$99.00",
+                "Comments": "Visit in home"
+            },
+            {
+                "Code": "A0100",
+                "Description": "Nonemergency Transport Taxi",
+                "Maximum_Fee": "$23.44",
+                "Comments": null
+            },
+            {
+                "Code": "A0110",
+                "Description": "Nonemergency Transport Bus",
+                "Maximum_Fee": "$23.32",
+                "Comments": null
+            },
+            {
+                "Code": "A0140",
+                "Description": "Nonemergency Transport Air",
+                "Maximum_Fee": "$110.00",
+                "Comments": null
+            },
+            {
+                "Code": "A0170",
+                "Description": "Transport Parking Fees/Tolls",
+                "Maximum_Fee": "M",
+                "Comments": null
+            },
+            {
+                "Code": "H1000",
+                "Description": "Prenatal Care At-Risk Assessment",
+                "Maximum_Fee": "$94.49",
+                "Comments": "Maternal assessment in office"
+            },
+            {
+                "Code": "H2000",
+                "Description": "Comprehensive Multidiscipline Evaluation",
+                "Maximum_Fee": "$117.15",
+                "Comments": "Assessment in home"
+            },
+            {
+                "Code": "S0215",
+                "Description": "Nonemerg Transp Mileage",
+                "Maximum_Fee": "$0.67",
+                "Comments": "Per Mile"
+            },
+            {
+                "Code": "S9442",
+                "Description": "Birthing Class",
+                "Maximum_Fee": "$34.84",
+                "Comments": null
+            },
+            {
+                "Code": "S9443",
+                "Description": "Lactation Class",
+                "Maximum_Fee": "$59.03",
+                "Comments": null
+            },
+            {
+                "Code": "S9444",
+                "Description": "Parenting Class",
+                "Maximum_Fee": "$46.67",
+                "Comments": null
+            },
+            {
+                "Code": "T1023",
+                "Description": "Program Intake Assessment",
+                "Maximum_Fee": "$94.49",
+                "Comments": "Infant assessment in office"
+            }
+        ]
+    },
+    "COB_Payment_Calculations": {
+        "COB_Methodologies": [
+            {
+                "Method": "Method 2",
+                "Details": "Calculates what the health plan would pay as primary and subtracts the primary carrier's payment from this amount. The balance is the secondary payment made by the system."
+            },
+            {
+                "Method": "Method 3",
+                "Details": "Compares what the health plan would pay as primary and the primary carrier's payment, and pays the lesser of the two amounts."
+            }
+        ]
+    },
+    "Claim ID": null,
+    "Provider Full Name": "MERCYONE WATERLOO HOME MEDICAL EQUIPMENT",
+    "Member Full Name": null,
+    "Steps": [
+        {
+            "No Lifetime Limit": null,
+            "S58 Benefit Pays": "$198.06",
+            "Using Fund - IA Payment Fund": null,
+            "No claim benefit preference": null
+        },
+        {
+            "COB Calculations": [
+                {
+                    "Method": "10",
+                    "COB Calculations for Line": "1",
+                    "Bill Amount / Primary Carrier Allowance": "$28.87",
+                    "Primary Carrier Paid": "$28.00",
+                    "Payment as Primary": "$31.18",
+                    "Secondary Payment Calculation": "Lesser Of (Primary Carrier Allowance - Primary Carrier Paid) vs. (Payment As Primary - Primary Carrier Paid)",
+                    "Payment as Secondary": "$5.87",
+                    "Plan pays as Primary based on user override": null
+                },
+                {
+                    "Method": "2",
+                    "COB Calculations for Line": "2",
+                    "Bill Amount / Primary Carrier Allowance": "$161.85",
+                    "Primary Carrier Paid": "$118.00",
+                    "Payment as Primary": "$109.06",
+                    "Secondary Payment Calculation": "Lesser Of (Primary Carrier Allowance - Primary Carrier Paid) vs. (Payment As Primary - Primary Carrier Paid)",
+                    "Payment as Secondary": "$32.00",
+                    "Plan pays as Primary based on user override": null
+                }
+            ]
+        },
+        {
+            "No claim benefit preference": null
+        }
+    ],
+    "revision_summary": [
+        {
+            "request_id": "RITM4521592",
+            "posted_archived_date": "07/17/24",
+            "ar_y_n": "N",
+            "states_reviewed": "UT",
+            "comments": "Added step endings in \"COB Edit Generated in System, No Primary EOB\", \"Coordination on Inpatient Claims, Member has Medicare Part B Only\", \"Determining if Claim Requires COB Processing\", \"COB Calculation(s)\", and \"Attribute in QNXT 4.81\" sections. Added UT only table rows in \"When an Authorization is Needed, Secondary Claim\". Added Method 10 to \"COB Methodologies\"."
+        },
+        {
+            "request_id": "RITM4477645",
+            "posted_archived_date": "04/22/2024",
+            "ar_y_n": "N",
+            "states_reviewed": "MI",
+            "comments": "Added the EOB Exceptions \u2013 Michigan section."
+        },
+        {
+            "request_id": "5928",
+            "posted_archived_date": "10/11/23",
+            "ar_y_n": "N",
+            "states_reviewed": null,
+            "comments": "In \"COB Calculations,\" fixed the placement of the screenshot showing the \"Pay\" tab from Step 2 to Step 1, and added appropriate screenshot showing the \"Edits\" tab in Step 2. In \"Attribute in QNXT 4.81\" section, updated screenshot to highlight Attribute Value instead of Description in Step 4."
+        },
+        {
+            "request_id": "5116",
+            "posted_archived_date": "06/10/22",
+            "ar_y_n": "N",
+            "states_reviewed": null,
+            "comments": "Minor clean-up of doc for Tier 0 approval: in \"Eligibility Tab,\" removed reference to doc retired in 2018, MHI-CLM-096, COB Unit Triage Process-SOP; in \"Third Party Liability (TPL) Scenarios\" removed reference to externally-housed doc Recovery Process \u2013 MHI Claims \u2013 SOP. Minor formatting updates and linked document titles."
+        },
+        {
+            "request_id": "QDC",
+            "posted_archived_date": "02/19/21",
+            "ar_y_n": "Y",
+            "states_reviewed": null,
+            "comments": "Received email approval from Claims Leadership on 01.20.21 to post as-is. Updated all references to \"QNXT\" to \"core claims processing system\". Updated/Removed document titles in \"References\". Updated reference document titles in \"When an Authorization is Needed, Secondary Claim\", \"Timely Filing, Secondary Claims\", \"Eligibility Tab\". Removed document reference in \"Third Party Liability (TPL) Scenarios\"."
+        }
+    ]
+}
